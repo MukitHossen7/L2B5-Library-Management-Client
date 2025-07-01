@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router";
+import { ModeToggle } from "../mode-toggle/mode-toggle";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
-    <div className="bg-gray-900 ">
+    <div className="">
       <div className="px-4 py-5 md:px-24 lg:px-8 w-11/12 md:w-11/12 lg:w-11/12 xl:container mx-auto">
         <div className="relative flex items-center justify-between">
           <Link to="/">
@@ -28,33 +29,31 @@ const Navbar = () => {
                 <rect x="14" y="1" width="7" height="6" />
                 <rect x="14" y="11" width="7" height="12" />
               </svg>
-              <span className="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase">
+              <span className="ml-2 text-xl font-bold tracking-wide uppercase">
                 Company
               </span>
             </div>
           </Link>
           <ul className="flex items-center hidden space-x-8 lg:flex">
             <Link to="/books">
-              <div className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-400">
+              <div className="font-medium tracking-wide transition-colors duration-200 hover:text-teal-400">
                 All Books
               </div>
             </Link>
             <Link to="/create-book">
-              <div className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-400">
+              <div className="font-medium tracking-wide  transition-colors duration-200 hover:text-teal-400">
                 Add Book
               </div>
             </Link>
             <Link to="/borrow-summary">
-              <div className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-400">
+              <div className="font-medium tracking-wide  transition-colors duration-200 hover:text-teal-400">
                 Borrow Summary
               </div>
             </Link>
           </ul>
           <ul className="flex items-center hidden space-x-8 lg:flex">
             <li>
-              <div className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-purple-600 hover:bg-purple-700 focus:shadow-outline focus:outline-none">
-                light
-              </div>
+              <ModeToggle></ModeToggle>
             </li>
           </ul>
           <div className="lg:hidden">
@@ -64,7 +63,10 @@ const Navbar = () => {
               className="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline"
               onClick={() => setIsMenuOpen(true)}
             >
-              <svg className="w-5 text-gray-600" viewBox="0 0 24 24">
+              <svg
+                className="w-5 dark:text-white text-gray-800"
+                viewBox="0 0 24 24"
+              >
                 <path
                   fill="currentColor"
                   d="M23,13H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,13,23,13z"
@@ -81,7 +83,7 @@ const Navbar = () => {
             </button>
             {isMenuOpen && (
               <div className="absolute top-0 left-0 w-full z-10">
-                <div className="p-5 bg-white border rounded shadow-sm">
+                <div className="p-5 dark:bg-[#0A0A0A] bg-white border rounded shadow-sm">
                   <div className="flex items-center justify-between mb-4">
                     <Link to="/">
                       <div className="inline-flex items-center">
@@ -100,7 +102,7 @@ const Navbar = () => {
                           <rect x="14" y="1" width="7" height="6" />
                           <rect x="14" y="11" width="7" height="12" />
                         </svg>
-                        <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
+                        <span className="ml-2 text-xl font-bold tracking-wide  uppercase">
                           Company
                         </span>
                       </div>
@@ -108,10 +110,13 @@ const Navbar = () => {
                     <button
                       aria-label="Close Menu"
                       title="Close Menu"
-                      className="p-2 -mt-2 -mr-2 transition duration-200 rounded hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                      className="p-2 -mt-2 -mr-2 transition duration-200 rounded hover:bg-gray-400 focus:bg-gray-400 focus:outline-none focus:shadow-outline"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      <svg className="w-5 text-gray-600" viewBox="0 0 24 24">
+                      <svg
+                        className="w-5 dark:text-white text-gray-800"
+                        viewBox="0 0 24 24"
+                      >
                         <path
                           fill="currentColor"
                           d="M19.7,4.3c-0.4-0.4-1-0.4-1.4,0L12,10.6L5.7,4.3c-0.4-0.4-1-0.4-1.4,0s-0.4,1,0,1.4l6.3,6.3-6.3,6.3c-0.4,0.4-0.4,1,0,1.4
@@ -124,25 +129,23 @@ const Navbar = () => {
                   <nav>
                     <ul className="space-y-4">
                       <Link to="/books">
-                        <div className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-purple-600">
+                        <div className="font-medium tracking-wide  transition-colors duration-200 hover:text-purple-600">
                           All Books
                         </div>
                       </Link>
                       <Link to="/create-book">
-                        <div className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-purple-600">
+                        <div className="font-medium tracking-wide transition-colors duration-200 hover:text-purple-600">
                           Add Book
                         </div>
                       </Link>
                       <Link to="/borrow-summary">
-                        <div className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-purple-600">
+                        <div className="font-medium tracking-wide  transition-colors duration-200 hover:text-purple-600">
                           Borrow Summary
                         </div>
                       </Link>
-                      <li>
-                        <div className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-purple-600 hover:bg-purple-700 focus:shadow-outline focus:outline-none">
-                          Light
-                        </div>
-                      </li>
+                      <div>
+                        <ModeToggle></ModeToggle>
+                      </div>
                     </ul>
                   </nav>
                 </div>

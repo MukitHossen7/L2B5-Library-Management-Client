@@ -7,7 +7,7 @@ const Footer = () => {
         {/* Logo */}
         <div className="flex flex-col items-center">
           <Link to="/" className="inline-flex items-center mb-2">
-            <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
+            <span className="ml-2 text-xl font-bold tracking-wide uppercase">
               Library Management
             </span>
           </Link>
@@ -15,7 +15,7 @@ const Footer = () => {
 
         {/* Links Section */}
 
-        <div className="flex justify-center text-sm text-gray-600 py-5">
+        <div className="flex justify-center text-sm  py-5">
           {/* Book Navigation */}
           <div>
             <ul className=" flex items-center gap-6">
@@ -39,7 +39,7 @@ const Footer = () => {
         </div>
 
         {/* Footer Bottom */}
-        <div className="w-full border-t pt-5 text-sm text-gray-600 text-center">
+        <div className="w-full border-t pt-5 text-sm text-center">
           © Copyright 2020 Lorem Inc. All rights reserved.
         </div>
       </div>
