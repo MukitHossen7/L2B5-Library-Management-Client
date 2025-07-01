@@ -11,7 +11,10 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        // path: "/tasks",
+        Component: AllBooks,
+      },
+      {
+        path: "books",
         Component: AllBooks,
       },
       {
