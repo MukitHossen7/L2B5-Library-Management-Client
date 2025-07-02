@@ -14,3 +14,13 @@ export interface IBook {
   available: boolean;
   image: string;
 }
+
+export interface IBooksResponse {
+  status: string;
+  data: IBook[];
+}
+
+export interface ICreateBookResponse {
+  status: string;
+  data: IBook;
+}
