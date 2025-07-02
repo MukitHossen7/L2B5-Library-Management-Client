@@ -5,7 +5,7 @@ import { ModeToggle } from "../mode-toggle/mode-toggle";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
-    <div className="">
+    <div className="sticky top-0 bg-white/50 dark:bg-neutral-950/50 backdrop-blur-2xl">
       <div className="px-4 py-5 md:px-24 lg:px-8 w-11/12 md:w-11/12 lg:w-11/12 xl:container mx-auto">
         <div className="relative flex items-center justify-between">
           <Link to="/">

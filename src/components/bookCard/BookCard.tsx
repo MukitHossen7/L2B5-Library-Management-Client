@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Button } from "../ui/button";
+
 import {
   Card,
   CardContent,
@@ -13,6 +13,7 @@ import { useDeleteBookMutation } from "@/redux/api/bookapi/bookApi";
 import toast from "react-hot-toast";
 import { UpdateDialog } from "../updateBook/UpdateBook";
 import { DeleteDialog } from "../deleteBook/DeleteBook";
+import { BorrowDialog } from "../borrowBook/BorrowBook";
 
 interface IPops {
   book: IBook;
@@ -64,7 +65,8 @@ const BookCard = ({ book }: IPops) => {
         </CardContent>
         <CardFooter className="flex justify-between gap-2">
           {/* Borrow Button */}
-          <Button>Borrow</Button>
+          {/* <Button>Borrow</Button> */}
+          <BorrowDialog book={book} />
 
           {/* Edit Button */}
           {/* <Button variant="outline">Edit</Button> */}
