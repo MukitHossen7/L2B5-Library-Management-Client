@@ -3,25 +3,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { formSchema } from "@/interface/book/book.zod.schema";
 import { Button } from "../ui/button";
-// import { Card, CardContent } from "../ui/card";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
 import { Textarea } from "../ui/textarea";
-const genres = [
-  "FICTION",
-  "NON_FICTION",
-  "SCIENCE",
-  "HISTORY",
-  "BIOGRAPHY",
-  "FANTASY",
-] as const;
 
 type FormData = z.infer<typeof formSchema>;
 import {
@@ -34,7 +18,9 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import type { IBook } from "@/interface/book/book.interface";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useUpdateBookMutation } from "@/redux/api/bookapi/bookApi";
+import toast from "react-hot-toast";
 
 interface UpdateDialogProps {
   book: IBook;
@@ -42,27 +28,45 @@ interface UpdateDialogProps {
 
 export function UpdateDialog({ book }: UpdateDialogProps) {
   const [open, setOpen] = useState(false);
-  console.log(book);
+  const [updateBook] = useUpdateBookMutation();
   const {
     register,
     handleSubmit,
-    setValue,
+    reset,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   });
 
+  useEffect(() => {
+    if (open) {
+      reset({
+        title: book.title,
+        author: book.author,
+        image: book.image,
+        genre: book.genre,
+        isbn: book.isbn,
+        description: book.description,
+        copies: book.copies,
+      });
+    }
+  }, [open, book, reset]);
   const onSubmit = async (data: FormData) => {
-    console.log("Submitted data:", data);
-    // এখানে API call বা backend integration করতে পারো
-    setOpen(false);
+    try {
+      await updateBook({ id: book._id, data: data });
+      toast.success("Book update successfully!");
+      setOpen(false);
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to update book");
+    }
   };
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline">Edit</Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Edit Book</DialogTitle>
         </DialogHeader>
@@ -109,25 +113,14 @@ export function UpdateDialog({ book }: UpdateDialogProps) {
             )}
           </div>
 
-          {/* Genre Dropdown */}
+          {/* Genre */}
           <div className="space-y-2">
             <Label htmlFor="genre">Genre</Label>
-            <Select
-              onValueChange={(value) =>
-                setValue("genre", value as FormData["genre"])
-              }
-            >
-              <SelectTrigger id="genre" className="w-full">
-                <SelectValue placeholder="Select Genre" />
-              </SelectTrigger>
-              <SelectContent>
-                {genres.map((genre) => (
-                  <SelectItem key={genre} value={genre}>
-                    {genre.replace("_", " ")}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <Input
+              id="genre"
+              placeholder="Add your genre here"
+              {...register("genre")}
+            />
             {errors.genre && (
               <p className="text-sm text-destructive">{errors.genre.message}</p>
             )}

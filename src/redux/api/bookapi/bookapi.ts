@@ -5,6 +5,11 @@ import type {
 } from "@/interface/book/book.interface";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+type UpdateBookArg = {
+  id: string;
+  data: Partial<Omit<IBook, "_id">>;
+};
+
 export const bookApi = createApi({
   reducerPath: "bookApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
@@ -29,6 +34,14 @@ export const bookApi = createApi({
       }),
       invalidatesTags: ["book"],
     }),
+    updateBook: builder.mutation<void, UpdateBookArg>({
+      query: ({ id, data }) => ({
+        url: `/books/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["book"],
+    }),
   }),
 });
 
@@ -36,4 +49,5 @@ export const {
   useCreateBookMutation,
   useGetBooksQuery,
   useDeleteBookMutation,
+  useUpdateBookMutation,
 } = bookApi;
