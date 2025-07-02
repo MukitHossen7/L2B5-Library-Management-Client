@@ -14,12 +14,17 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { FormProvider, useForm } from "react-hook-form";
+import {
+  FormProvider,
+  useForm,
+  type FieldValues,
+  type SubmitHandler,
+} from "react-hook-form";
 
 const AddBook = () => {
   const form = useForm();
   const { handleSubmit, control } = form;
-  const onSubmit = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
     const bookData = {
       ...data,
       copies: Number(data.copies),
