@@ -14,22 +14,25 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  FormProvider,
-  useForm,
-  type FieldValues,
-  type SubmitHandler,
-} from "react-hook-form";
+import type { IBook } from "@/interface/book/book.interface";
+import { useCreateBookMutation } from "@/redux/api/bookapi/bookApi";
+import { FormProvider, useForm, type SubmitHandler } from "react-hook-form";
 
 const AddBook = () => {
-  const form = useForm();
+  const form = useForm<IBook>();
+  const [createBook] = useCreateBookMutation();
   const { handleSubmit, control } = form;
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    const bookData = {
-      ...data,
-      copies: Number(data.copies),
-    };
-    console.log(bookData);
+  const onSubmit: SubmitHandler<IBook> = async (data) => {
+    try {
+      const bookData = {
+        ...data,
+        copies: Number(data?.copies),
+      };
+      await createBook(bookData).unwrap();
+      console.log(bookData);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white dark:bg-[#171717] rounded-lg shadow-lg">
