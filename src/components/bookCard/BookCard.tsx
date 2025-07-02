@@ -22,7 +22,7 @@ const BookCard = ({ book }: IPops) => {
           <img
             src={book.image}
             alt={book.title}
-            className="w-full h-52 object-cover rounded-md"
+            className="w-full h-80 object-cover rounded-md"
           />
           <CardTitle className="text-xl mt-2">{book.title}</CardTitle>
           <CardDescription>by {book.author}</CardDescription>
