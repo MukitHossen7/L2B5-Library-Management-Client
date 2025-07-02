@@ -9,12 +9,16 @@ import {
   CardTitle,
 } from "../ui/card";
 import type { IBook } from "@/interface/book/book.interface";
+import { DeleteDialog } from "../deleteBook/DeleteBook";
 
 interface IPops {
   book: IBook;
 }
 
 const BookCard = ({ book }: IPops) => {
+  const handleDelete = () => {
+    console.log(book._id);
+  };
   return (
     <div>
       <Card className="shadow-lg bg-white dark:bg-[#171717] dark:text-white">
@@ -56,7 +60,10 @@ const BookCard = ({ book }: IPops) => {
           <Button variant="outline">Edit</Button>
 
           {/* Delete Button */}
-          <Button variant="destructive">Delete</Button>
+          {/* <Button onClick={() => handleDelete(book._id)} variant="destructive">
+            Delete
+          </Button> */}
+          <DeleteDialog onDelete={handleDelete} />
         </CardFooter>
       </Card>
     </div>

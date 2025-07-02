@@ -19,13 +19,12 @@ const AllBooks = () => {
     );
 
   const books: IBook[] = bookData?.data || [];
-
   return (
     <div className="w-11/12 md:w-11/12 lg:w-11/12 xl:container mx-auto">
       <h1 className="text-3xl font-bold mb-5"> All Books </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {books.map((book) => (
-          <BookCard book={book} key={book?.isbn}></BookCard>
+          <BookCard book={book} key={book?._id}></BookCard>
         ))}
       </div>
     </div>
