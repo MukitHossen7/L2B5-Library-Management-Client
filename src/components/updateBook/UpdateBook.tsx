@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { formSchema } from "@/interface/book/book.zod.schema";
 import { Button } from "../ui/button";
-import { Card, CardContent } from "../ui/card";
+// import { Card, CardContent } from "../ui/card";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import {
@@ -24,7 +24,25 @@ const genres = [
 ] as const;
 
 type FormData = z.infer<typeof formSchema>;
-const UpdateBook = () => {
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import type { IBook } from "@/interface/book/book.interface";
+import { useState } from "react";
+
+interface UpdateDialogProps {
+  book: IBook;
+}
+
+export function UpdateDialog({ book }: UpdateDialogProps) {
+  const [open, setOpen] = useState(false);
+  console.log(book);
   const {
     register,
     handleSubmit,
@@ -37,17 +55,17 @@ const UpdateBook = () => {
   const onSubmit = async (data: FormData) => {
     console.log("Submitted data:", data);
     // এখানে API call বা backend integration করতে পারো
+    setOpen(false);
   };
-
   return (
-    <Card className="max-w-xl mx-auto mt-10">
-      {/* <Helmet>
-        <title>Add New Book</title>
-        <meta name="description" content="Add New Book" />
-      </Helmet> */}
-
-      <CardContent className="p-6">
-        <h2 className="text-2xl font-bold mb-6">Add New Book</h2>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button variant="outline">Edit</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Edit Book</DialogTitle>
+        </DialogHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {/* Title */}
@@ -154,18 +172,14 @@ const UpdateBook = () => {
               </p>
             )}
           </div>
-
-          {/* Submit */}
-          {/* <Button type="submit" disabled={isSubmitting} className="w-full mt-4">
-            {isSubmitting ? "Creating..." : "Create Book"}
-          </Button> */}
-          <Button type="submit" className="w-full mt-4">
-            Update Book
-          </Button>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button variant="outline">Cancel</Button>
+            </DialogClose>
+            <Button type="submit">Save changes</Button>
+          </DialogFooter>
         </form>
-      </CardContent>
-    </Card>
+      </DialogContent>
+    </Dialog>
   );
-};
-
-export default UpdateBook;
+}

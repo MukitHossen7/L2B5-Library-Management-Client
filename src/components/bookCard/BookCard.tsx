@@ -9,9 +9,10 @@ import {
   CardTitle,
 } from "../ui/card";
 import type { IBook } from "@/interface/book/book.interface";
-import { DeleteDialog } from "../deleteBook/DeleteBook";
 import { useDeleteBookMutation } from "@/redux/api/bookapi/bookApi";
 import toast from "react-hot-toast";
+import { UpdateDialog } from "../updateBook/UpdateBook";
+import { DeleteDialog } from "../deleteBook/DeleteBook";
 
 interface IPops {
   book: IBook;
@@ -66,8 +67,8 @@ const BookCard = ({ book }: IPops) => {
           <Button>Borrow</Button>
 
           {/* Edit Button */}
-          <Button variant="outline">Edit</Button>
-
+          {/* <Button variant="outline">Edit</Button> */}
+          <UpdateDialog book={book} />
           {/* Delete Button */}
           <DeleteDialog onDelete={handleDelete} />
         </CardFooter>

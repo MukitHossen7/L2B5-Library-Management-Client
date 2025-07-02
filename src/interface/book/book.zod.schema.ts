@@ -12,6 +12,6 @@ export const formSchema = z.object({
   description: z.string().optional(),
   copies: z
     .number({ invalid_type_error: "Copies must be a number" })
-    .min(1, "At least one copy is required"),
+    .min(0, "At least 0 copy is required"),
   available: z.boolean().optional(),
 });
