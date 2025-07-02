@@ -19,7 +19,11 @@ import { FormProvider, useForm } from "react-hook-form";
 const AddBook = () => {
   const form = useForm();
   const { handleSubmit, control } = form;
-  const onSubmit = (bookData) => {
+  const onSubmit = (data) => {
+    const bookData = {
+      ...data,
+      copies: Number(data.copies),
+    };
     console.log(bookData);
   };
   return (
