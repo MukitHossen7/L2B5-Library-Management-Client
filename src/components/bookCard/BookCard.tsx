@@ -10,14 +10,23 @@ import {
 } from "../ui/card";
 import type { IBook } from "@/interface/book/book.interface";
 import { DeleteDialog } from "../deleteBook/DeleteBook";
+import { useDeleteBookMutation } from "@/redux/api/bookapi/bookApi";
+import toast from "react-hot-toast";
 
 interface IPops {
   book: IBook;
 }
 
 const BookCard = ({ book }: IPops) => {
-  const handleDelete = () => {
-    console.log(book._id);
+  const [deleteBook] = useDeleteBookMutation();
+  const handleDelete = async () => {
+    try {
+      await deleteBook(book._id);
+      toast.success("Book Deleted successfully!");
+    } catch (error) {
+      console.log(error);
+      toast.error("Book Deleted failed!");
+    }
   };
   return (
     <div>
@@ -60,9 +69,6 @@ const BookCard = ({ book }: IPops) => {
           <Button variant="outline">Edit</Button>
 
           {/* Delete Button */}
-          {/* <Button onClick={() => handleDelete(book._id)} variant="destructive">
-            Delete
-          </Button> */}
           <DeleteDialog onDelete={handleDelete} />
         </CardFooter>
       </Card>
