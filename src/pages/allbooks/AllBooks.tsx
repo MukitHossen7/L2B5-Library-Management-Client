@@ -1,3 +1,4 @@
+import BookCard from "@/components/bookCard/BookCard";
 import type { IBook } from "@/interface/book/book.interface";
 import { useGetBooksQuery } from "@/redux/api/bookapi/bookApi";
 
@@ -18,10 +19,15 @@ const AllBooks = () => {
     );
 
   const books: IBook[] = bookData?.data || [];
-  console.log(books);
+
   return (
-    <div>
-      <h1>This is All Books Page</h1>
+    <div className="w-11/12 md:w-11/12 lg:w-11/12 xl:container mx-auto">
+      <h1 className="text-3xl font-bold mb-5"> All Books </h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {books.map((book) => (
+          <BookCard book={book} key={book?.isbn}></BookCard>
+        ))}
+      </div>
     </div>
   );
 };

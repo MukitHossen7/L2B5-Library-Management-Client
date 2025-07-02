@@ -1,0 +1,66 @@
+import { cn } from "@/lib/utils";
+import { Button } from "../ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
+import type { IBook } from "@/interface/book/book.interface";
+
+interface IPops {
+  book: IBook;
+}
+
+const BookCard = ({ book }: IPops) => {
+  return (
+    <div>
+      <Card className="shadow-lg bg-white dark:bg-[#171717] dark:text-white">
+        <CardHeader>
+          <img
+            src={book.image}
+            alt={book.title}
+            className="w-full h-52 object-cover rounded-md"
+          />
+          <CardTitle className="text-xl mt-2">{book.title}</CardTitle>
+          <CardDescription>by {book.author}</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-2">
+          <p>
+            <strong>Genre:</strong> {book.genre}
+          </p>
+          <p>
+            <strong>ISBN:</strong> {book.isbn}
+          </p>
+          <p>
+            <strong>Copies:</strong> {book.copies}
+          </p>
+          <p>
+            <span
+              className={cn({
+                "text-green-500": book?.available,
+                "text-red-500": !book?.available,
+              })}
+            >
+              {book.available ? "Available" : "Unavailable"}
+            </span>
+          </p>
+        </CardContent>
+        <CardFooter className="flex justify-between gap-2">
+          {/* Borrow Button */}
+          <Button>Borrow</Button>
+
+          {/* Edit Button */}
+          <Button variant="outline">Edit</Button>
+
+          {/* Delete Button */}
+          <Button variant="destructive">Delete</Button>
+        </CardFooter>
+      </Card>
+    </div>
+  );
+};
+
+export default BookCard;
