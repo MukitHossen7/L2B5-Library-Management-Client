@@ -17,8 +17,11 @@ import { Textarea } from "@/components/ui/textarea";
 import type { IBook } from "@/interface/book/book.interface";
 import { useCreateBookMutation } from "@/redux/api/bookapi/bookApi";
 import { FormProvider, useForm, type SubmitHandler } from "react-hook-form";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 const AddBook = () => {
+  const navigate = useNavigate();
   const form = useForm<IBook>();
   const [createBook] = useCreateBookMutation();
   const { handleSubmit, control } = form;
@@ -29,9 +32,11 @@ const AddBook = () => {
         copies: Number(data?.copies),
       };
       await createBook(bookData).unwrap();
-      console.log(bookData);
+      toast.success("Book created successfully!");
+      navigate("/books");
     } catch (error) {
       console.log(error);
+      toast.error("Failed to create book");
     }
   };
   return (
