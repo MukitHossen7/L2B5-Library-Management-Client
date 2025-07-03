@@ -26,10 +26,7 @@ export const bookApi = createApi({
         `/books?page=${page}&limit=${limit}`,
       providesTags: ["book", "borrows"],
     }),
-    getBookById: builder.query<IBook, string>({
-      query: (id) => `books/${id}`,
-      providesTags: (result, error, id) => [{ type: "book", id }],
-    }),
+
     createBook: builder.mutation<ICreateBookResponse, ICreateBookInput>({
       query: (bookData) => ({
         url: "/books",
@@ -61,5 +58,4 @@ export const {
   useGetBooksQuery,
   useDeleteBookMutation,
   useUpdateBookMutation,
-  useGetBookByIdQuery,
 } = bookApi;
