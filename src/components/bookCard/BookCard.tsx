@@ -33,7 +33,7 @@ const BookCard = ({ book }: IPops) => {
   return (
     <div>
       <Card className="shadow-lg bg-white dark:bg-[#171717] dark:text-white">
-        <CardHeader>
+        <CardHeader className="">
           <img
             src={book.image}
             alt={book.title}
@@ -42,7 +42,7 @@ const BookCard = ({ book }: IPops) => {
           <CardTitle className="text-xl mt-2">{book.title}</CardTitle>
           <CardDescription>by {book.author}</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-2">
+        <CardContent className="space-y-1">
           <p>
             <strong>Genre:</strong> {book.genre}
           </p>

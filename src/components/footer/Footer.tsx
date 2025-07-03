@@ -7,8 +7,8 @@ const Footer = () => {
         {/* Logo */}
         <div className="flex flex-col items-center">
           <Link to="/" className="inline-flex items-center mb-2">
-            <span className="ml-2 text-xl font-bold tracking-wide uppercase">
-              Library Management
+            <span className="ml-2 text-lg lg:text-xl font-bold tracking-wide uppercase">
+              Librarys Management
             </span>
           </Link>
         </div>
@@ -18,14 +18,14 @@ const Footer = () => {
         <div className="flex justify-center text-sm  py-5">
           {/* Book Navigation */}
           <div>
-            <ul className=" flex items-center gap-6">
+            <ul className=" flex items-center gap-6 text-base">
               <li>
                 <Link to="/books" className="hover:text-purple-600">
                   All Books
                 </Link>
               </li>
               <li>
-                <Link to="/add-book" className="hover:text-purple-600">
+                <Link to="/create-book" className="hover:text-purple-600">
                   Add Book
                 </Link>
               </li>
@@ -39,8 +39,8 @@ const Footer = () => {
         </div>
 
         {/* Footer Bottom */}
-        <div className="w-full border-t pt-5 text-sm text-center">
-          © Copyright 2020 Lorem Inc. All rights reserved.
+        <div className="w-full border-t pt-5 text-sm text-center font-semibold">
+          © Copyright 2025 <strong>Library</strong>. All rights reserved.
         </div>
       </div>
     </div>

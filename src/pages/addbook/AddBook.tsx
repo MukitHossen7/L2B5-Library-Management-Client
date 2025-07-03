@@ -55,14 +55,14 @@ const AddBook = () => {
     }
   };
   return (
-    <Card className="max-w-xl mx-auto mt-10">
+    <Card className="max-w-2xl mx-auto mt-10">
       <Helmet>
         <title>Add New Book</title>
         <meta name="description" content="Add New Book" />
       </Helmet>
 
       <CardContent className="p-6">
-        <h2 className="text-2xl font-bold mb-6">Add New Book</h2>
+        <h2 className="text-lg lg:text-2xl font-bold mb-6">Add New Book</h2>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {/* Title */}

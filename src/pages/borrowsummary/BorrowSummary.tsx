@@ -34,7 +34,7 @@ const BorrowSummary = () => {
   const borrowSummerys: TBorrowSummary[] = borrowData?.data || [];
 
   return (
-    <div className="w-11/12 md:w-11/12 lg:w-11/12 xl:container mx-auto">
+    <div className="w-11/12 md:w-11/12 lg:w-11/12 xl:container mx-auto mt-3">
       <Helmet>
         <title>Borrow Summary</title>
         <meta name="description" content="Borrow Summary" />
