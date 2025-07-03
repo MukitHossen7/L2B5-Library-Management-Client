@@ -37,7 +37,7 @@ export function BorrowDialog({ book }: BorrowDialogProps) {
   const navigate = useNavigate();
   const handleSubmit = async () => {
     if (!book || quantity < 1 || !dueDate) {
-      toast.error("All field is required");
+      toast.error("All fields is required");
       return;
     }
     try {
@@ -53,7 +53,7 @@ export function BorrowDialog({ book }: BorrowDialogProps) {
       setOpen(false);
     } catch (error) {
       console.log(error);
-      toast.error("Book borrow failed");
+      toast.error("Failed to book borrow");
     }
   };
   return (
@@ -82,7 +82,7 @@ export function BorrowDialog({ book }: BorrowDialogProps) {
             />
             {/* Date Picker */}
             <div className="space-y-1">
-              <Label>Due Date</Label>
+              <Label className="mb-2">Due Date</Label>
               <Popover>
                 <PopoverTrigger asChild>
                   <Button

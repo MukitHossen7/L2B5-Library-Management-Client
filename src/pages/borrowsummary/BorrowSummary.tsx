@@ -60,7 +60,7 @@ const BorrowSummary = () => {
                 </p>
                 <p className="">
                   <strong className="text-lg font-semibold ">
-                    Total Borrowed:
+                    Total Quantity:
                   </strong>{" "}
                   <span className="text-lg font-medium ">
                     {item.totalQuantity}
