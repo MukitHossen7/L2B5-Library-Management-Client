@@ -21,8 +21,9 @@ import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { Calendar } from "../ui/calendar";
 import { useCreateBorrowMutation } from "@/redux/api/borrowApi/borrowApi";
-import { useGetBooksQuery } from "@/redux/api/bookapi/bookApi";
+
 import { useNavigate } from "react-router";
+import { useGetBooksQuery } from "@/redux/api/bookapi/bookApi";
 
 interface BorrowDialogProps {
   book: IBook;
@@ -33,7 +34,7 @@ export function BorrowDialog({ book }: BorrowDialogProps) {
   const [dueDate, setDueDate] = useState<Date | null>(null);
   const [open, setOpen] = useState(false);
   const [createBorrow] = useCreateBorrowMutation();
-  const { refetch } = useGetBooksQuery();
+  const { refetch } = useGetBooksQuery({});
   const navigate = useNavigate();
   const handleSubmit = async () => {
     if (!book || quantity < 1 || !dueDate) {
@@ -56,6 +57,7 @@ export function BorrowDialog({ book }: BorrowDialogProps) {
       toast.error("Failed to book borrow");
     }
   };
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -120,7 +122,7 @@ export function BorrowDialog({ book }: BorrowDialogProps) {
               <Button variant="outline">Cancel</Button>
             </DialogClose>
             <Button type="submit" onClick={handleSubmit}>
-              Save changes
+              Confirm Borrow
             </Button>
           </DialogFooter>
         </div>

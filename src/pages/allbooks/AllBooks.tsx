@@ -48,7 +48,7 @@ const AllBooks = () => {
             ))}
           </div>
 
-          <div className="flex justify-center items-center mt-8 space-x-2">
+          <div className="flex justify-center items-center mt-10 space-x-2">
             <Button
               onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
               disabled={page === 1}

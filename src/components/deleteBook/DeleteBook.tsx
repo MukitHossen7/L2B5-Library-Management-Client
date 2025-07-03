@@ -27,7 +27,9 @@ export function DeleteDialog({ onDelete }: IDeleteDialogProps) {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Confirm Deletion</AlertDialogTitle>
+          <AlertDialogTitle className="text-xl">
+            Confirm Deletion
+          </AlertDialogTitle>
           <AlertDialogDescription>
             Are you sure? you want to delete.
           </AlertDialogDescription>

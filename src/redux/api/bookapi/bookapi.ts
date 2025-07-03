@@ -10,16 +10,24 @@ type UpdateBookArg = {
   data: Partial<Omit<IBook, "_id">>;
 };
 
+interface IGetBooksParams {
+  page?: number;
+  limit?: number;
+}
 type ICreateBookInput = Omit<IBook, "_id">;
 export const bookApi = createApi({
   reducerPath: "bookApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
   tagTypes: ["book", "borrows"],
   endpoints: (builder) => ({
-    getBooks: builder.query<IBooksResponse, { page: number; limit: number }>({
-      query: ({ page, limit } = { page: 1, limit: 10 }) =>
+    getBooks: builder.query<IBooksResponse, IGetBooksParams>({
+      query: ({ page = 1, limit = 10 } = {}) =>
         `/books?page=${page}&limit=${limit}`,
       providesTags: ["book", "borrows"],
+    }),
+    getBookById: builder.query<IBook, string>({
+      query: (id) => `books/${id}`,
+      providesTags: (result, error, id) => [{ type: "book", id }],
     }),
     createBook: builder.mutation<ICreateBookResponse, ICreateBookInput>({
       query: (bookData) => ({
@@ -52,4 +60,5 @@ export const {
   useGetBooksQuery,
   useDeleteBookMutation,
   useUpdateBookMutation,
+  useGetBookByIdQuery,
 } = bookApi;
