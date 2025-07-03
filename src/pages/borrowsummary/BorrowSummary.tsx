@@ -1,3 +1,4 @@
+import Loader from "@/components/loader/Loader";
 import { Card, CardContent } from "@/components/ui/card";
 
 import { useGetBorrowSummaryQuery } from "@/redux/api/borrowApi/borrowApi";
@@ -18,9 +19,9 @@ const BorrowSummary = () => {
   } = useGetBorrowSummaryQuery(undefined);
   if (isLoading) {
     return (
-      <p className="text-center text-destructive text-2xl  dark:text-white">
-        Loading....
-      </p>
+      <div className="flex justify-center items-center h-screen">
+        <Loader />
+      </div>
     );
   }
 

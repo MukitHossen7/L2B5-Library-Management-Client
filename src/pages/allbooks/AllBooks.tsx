@@ -1,4 +1,6 @@
 import BookCard from "@/components/bookCard/BookCard";
+import Loader from "@/components/loader/Loader";
+// import Loader from "@/components/loader/Loader";
 import { Button } from "@/components/ui/button";
 import type { IBook } from "@/interface/book/book.interface";
 import { useGetBooksQuery } from "@/redux/api/bookapi/bookApi";
@@ -18,9 +20,9 @@ const AllBooks = () => {
 
   if (isLoading) {
     return (
-      <p className="text-center text-destructive text-2xl  dark:text-white">
-        Loading....
-      </p>
+      <div className="flex justify-center items-center h-screen">
+        <Loader></Loader>
+      </div>
     );
   }
 
