@@ -1,15 +1,20 @@
 import { Link } from "react-router";
-
+import bookIcon from "../../../src/assets/icons8-book-50.png";
 const Footer = () => {
   return (
     <div className="w-11/12 md:w-11/12 lg:w-11/12 xl:container mx-auto py-10">
       <div className="flex flex-col items-center text-center">
         {/* Logo */}
         <div className="flex flex-col items-center">
-          <Link to="/" className="inline-flex items-center mb-2">
-            <span className="ml-2 text-lg lg:text-xl font-bold tracking-wide uppercase">
-              Librarys Management
-            </span>
+          <Link to="/" className="inline-flex items-center mb-1">
+            <div className="ml-2 text-lg lg:text-xl font-bold tracking-wide uppercase flex items-center gap-2">
+              <img
+                src={bookIcon}
+                alt="Book Icon"
+                className="h-8 w-8 dark:invert"
+              />
+              <span>Library</span>
+            </div>
           </Link>
         </div>
 

@@ -9,7 +9,10 @@ import {
   CardTitle,
 } from "../ui/card";
 import type { IBook } from "@/interface/book/book.interface";
-import { useDeleteBookMutation } from "@/redux/api/bookapi/bookApi";
+import {
+  useDeleteBookMutation,
+  useGetBooksQuery,
+} from "@/redux/api/bookapi/bookApi";
 import toast from "react-hot-toast";
 import { UpdateDialog } from "../updateBook/UpdateBook";
 import { DeleteDialog } from "../deleteBook/DeleteBook";
@@ -21,6 +24,7 @@ interface IPops {
 
 const BookCard = ({ book }: IPops) => {
   const [deleteBook] = useDeleteBookMutation();
+  const { refetch } = useGetBooksQuery({});
   const handleDelete = async () => {
     try {
       await deleteBook(book._id!);
@@ -65,7 +69,12 @@ const BookCard = ({ book }: IPops) => {
         </CardContent>
         <CardFooter className="flex justify-between gap-2">
           {/* Borrow Button */}
-          <BorrowDialog book={book} />
+          <BorrowDialog
+            book={book}
+            onComplete={() => {
+              refetch();
+            }}
+          />
 
           {/* Edit Button */}
           <UpdateDialog book={book} />

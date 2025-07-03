@@ -23,18 +23,19 @@ import { Calendar } from "../ui/calendar";
 import { useCreateBorrowMutation } from "@/redux/api/borrowApi/borrowApi";
 
 import { useNavigate } from "react-router";
-import { useGetBooksQuery } from "@/redux/api/bookapi/bookApi";
+// import { useGetBooksQuery } from "@/redux/api/bookapi/bookApi";
 
 interface BorrowDialogProps {
   book: IBook;
+  onComplete: () => void;
 }
 
-export function BorrowDialog({ book }: BorrowDialogProps) {
+export function BorrowDialog({ book, onComplete }: BorrowDialogProps) {
   const [quantity, setQuantity] = useState<number>(1);
   const [dueDate, setDueDate] = useState<Date | null>(null);
   const [open, setOpen] = useState(false);
   const [createBorrow] = useCreateBorrowMutation();
-  const { refetch } = useGetBooksQuery({});
+  // const { refetch } = useGetBooksQuery({});
   const navigate = useNavigate();
   const handleSubmit = async () => {
     if (!book || quantity < 1 || !dueDate) {
@@ -48,7 +49,7 @@ export function BorrowDialog({ book }: BorrowDialogProps) {
         dueDate,
       };
       await createBorrow(borrowData).unwrap();
-      refetch();
+      onComplete();
       toast.success("Book borrow successfully!");
       navigate("/borrow-summary");
       setOpen(false);

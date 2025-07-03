@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import { ModeToggle } from "../mode-toggle/mode-toggle";
-
+import bookIcon from "../../../src/assets/icons8-book-50.png";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
@@ -14,23 +14,13 @@ const Navbar = () => {
               title="Company"
               className="inline-flex items-center"
             >
-              <svg
-                className="w-8 text-teal-400"
-                viewBox="0 0 24 24"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeMiterlimit="10"
-                stroke="currentColor"
-                fill="none"
-              >
-                <rect x="3" y="1" width="7" height="12" />
-                <rect x="3" y="17" width="7" height="6" />
-                <rect x="14" y="1" width="7" height="6" />
-                <rect x="14" y="11" width="7" height="12" />
-              </svg>
+              <img
+                src={bookIcon}
+                alt="Book Icon"
+                className="h-8 w-8 dark:invert"
+              />
               <span className="ml-2 text-xl font-bold tracking-wide uppercase">
-                Company
+                Library
               </span>
             </div>
           </Link>
@@ -143,7 +133,7 @@ const Navbar = () => {
                           Borrow Summary
                         </div>
                       </Link>
-                      <div>
+                      <div className="mt-2">
                         <ModeToggle></ModeToggle>
                       </div>
                     </ul>
