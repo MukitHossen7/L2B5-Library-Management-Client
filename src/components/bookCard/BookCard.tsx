@@ -65,11 +65,9 @@ const BookCard = ({ book }: IPops) => {
         </CardContent>
         <CardFooter className="flex justify-between gap-2">
           {/* Borrow Button */}
-          {/* <Button>Borrow</Button> */}
           <BorrowDialog book={book} />
 
           {/* Edit Button */}
-          {/* <Button variant="outline">Edit</Button> */}
           <UpdateDialog book={book} />
           {/* Delete Button */}
           <DeleteDialog onDelete={handleDelete} />

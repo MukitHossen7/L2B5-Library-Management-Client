@@ -16,8 +16,8 @@ export const bookApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
   tagTypes: ["book", "borrows"],
   endpoints: (builder) => ({
-    getBooks: builder.query<IBooksResponse, void>({
-      query: () => "/books",
+    getBooks: builder.query<IBooksResponse, { page: number; limit: number }>({
+      query: ({ page, limit }) => `/books?page=${page}&limit=${limit}`,
       providesTags: ["book", "borrows"],
     }),
     createBook: builder.mutation<ICreateBookResponse, ICreateBookInput>({

@@ -16,11 +16,20 @@ export interface IBook {
   image: string;
 }
 
-export interface IBooksResponse {
-  status: string;
-  data: IBook[];
-}
+// export interface IBooksResponse {
+//   status: string;
+//   data: IBook[];
+// }
 
+export interface IBooksResponse {
+  data: IBook[];
+  meta: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}
 export interface ICreateBookResponse {
   status: string;
   data: IBook;

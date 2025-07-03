@@ -1,10 +1,21 @@
 import BookCard from "@/components/bookCard/BookCard";
+import { Button } from "@/components/ui/button";
 import type { IBook } from "@/interface/book/book.interface";
 import { useGetBooksQuery } from "@/redux/api/bookapi/bookApi";
+import { useState } from "react";
 import { Helmet } from "react-helmet";
 
 const AllBooks = () => {
-  const { data: bookData, isLoading, isError } = useGetBooksQuery(undefined);
+  const [page, setPage] = useState(1);
+  const limit = 9;
+  const {
+    data: bookData,
+    isLoading,
+    isError,
+  } = useGetBooksQuery({ page, limit });
+  const books: IBook[] = bookData?.data || [];
+  const totalPages = bookData?.meta?.totalPages || 1;
+
   if (isLoading) {
     return (
       <p className="text-center text-destructive text-2xl  dark:text-white">
@@ -18,7 +29,6 @@ const AllBooks = () => {
       <p className="text-center text-destructive">Failed to load books.</p>
     );
 
-  const books: IBook[] = bookData?.data || [];
   return (
     <div className="w-11/12 md:w-11/12 lg:w-11/12 xl:container mx-auto">
       <Helmet>
@@ -31,11 +41,29 @@ const AllBooks = () => {
           No books found.
         </p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {books.map((book) => (
-            <BookCard book={book} key={book?._id}></BookCard>
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {books.map((book) => (
+              <BookCard book={book} key={book?._id}></BookCard>
+            ))}
+          </div>
+
+          <div className="flex justify-center items-center mt-8 space-x-2">
+            <Button
+              onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+              disabled={page === 1}
+            >
+              Previous
+            </Button>
+            <span className="px-4 font-medium text-lg">{page}</span>
+            <Button
+              onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+              disabled={page === totalPages}
+            >
+              Next
+            </Button>
+          </div>
+        </>
       )}
     </div>
   );
