@@ -21,7 +21,7 @@ import type { IBook } from "@/interface/book/book.interface";
 import { useEffect, useState } from "react";
 import { useUpdateBookMutation } from "@/redux/api/bookapi/bookApi";
 import toast from "react-hot-toast";
-
+import { useLazyGetBorrowSummaryQuery } from "@/redux/api/borrowApi/borrowApi";
 interface UpdateDialogProps {
   book: IBook;
 }
@@ -29,6 +29,7 @@ interface UpdateDialogProps {
 export function UpdateDialog({ book }: UpdateDialogProps) {
   const [open, setOpen] = useState(false);
   const [updateBook] = useUpdateBookMutation();
+  const [triggerBorrowSummary] = useLazyGetBorrowSummaryQuery();
   const {
     register,
     handleSubmit,
@@ -53,9 +54,10 @@ export function UpdateDialog({ book }: UpdateDialogProps) {
   }, [open, book, reset]);
   const onSubmit = async (data: FormData) => {
     try {
-      await updateBook({ id: book._id, data: data });
-      toast.success("Book update successfully!");
+      await updateBook({ id: book._id!, data: data });
+      await triggerBorrowSummary(undefined);
       setOpen(false);
+      toast.success("Book update successfully!");
     } catch (error) {
       console.log(error);
       toast.error("Failed to update book");

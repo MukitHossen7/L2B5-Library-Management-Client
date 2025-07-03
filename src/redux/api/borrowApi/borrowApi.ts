@@ -20,4 +20,8 @@ export const borrowApi = createApi({
   }),
 });
 
-export const { useCreateBorrowMutation, useGetBorrowSummaryQuery } = borrowApi;
+export const {
+  useCreateBorrowMutation,
+  useGetBorrowSummaryQuery,
+  useLazyGetBorrowSummaryQuery,
+} = borrowApi;
