@@ -3,11 +3,11 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const borrowApi = createApi({
   reducerPath: "borrowApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
-  tagTypes: ["borrow"],
+  tagTypes: ["borrows", "book"],
   endpoints: (builder) => ({
     getBorrowSummary: builder.query({
       query: () => "/borrow",
-      providesTags: ["borrow"],
+      providesTags: ["borrows", "book"],
     }),
     createBorrow: builder.mutation({
       query: (borrowData) => ({
@@ -15,7 +15,7 @@ export const borrowApi = createApi({
         method: "POST",
         body: borrowData,
       }),
-      invalidatesTags: ["borrow"],
+      invalidatesTags: ["borrows", "book"],
     }),
   }),
 });

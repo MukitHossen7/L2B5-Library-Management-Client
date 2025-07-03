@@ -13,11 +13,11 @@ type UpdateBookArg = {
 export const bookApi = createApi({
   reducerPath: "bookApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
-  tagTypes: ["book", "borrow"],
+  tagTypes: ["book", "borrows"],
   endpoints: (builder) => ({
     getBooks: builder.query<IBooksResponse, void>({
       query: () => "/books",
-      providesTags: ["book"],
+      providesTags: ["book", "borrows"],
     }),
     createBook: builder.mutation<ICreateBookResponse, IBook>({
       query: (bookData) => ({
@@ -25,14 +25,14 @@ export const bookApi = createApi({
         method: "POST",
         body: bookData,
       }),
-      invalidatesTags: ["book"],
+      invalidatesTags: ["book", "borrows"],
     }),
     deleteBook: builder.mutation<void, string>({
       query: (id) => ({
         url: `/books/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["book"],
+      invalidatesTags: ["book", "borrows"],
     }),
     updateBook: builder.mutation<void, UpdateBookArg>({
       query: ({ id, data }) => ({
@@ -40,7 +40,7 @@ export const bookApi = createApi({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: ["book", "borrow"],
+      invalidatesTags: ["book", "borrows"],
     }),
   }),
 });
