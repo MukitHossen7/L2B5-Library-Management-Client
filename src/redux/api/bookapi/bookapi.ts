@@ -1,3 +1,4 @@
+import { BASE_URL } from "@/config/baseUrl";
 import type {
   IBook,
   IBooksResponse,
@@ -17,7 +18,7 @@ interface IGetBooksParams {
 type ICreateBookInput = Omit<IBook, "_id">;
 export const bookApi = createApi({
   reducerPath: "bookApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
+  baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   tagTypes: ["book", "borrows"],
   endpoints: (builder) => ({
     getBooks: builder.query<IBooksResponse, IGetBooksParams>({
