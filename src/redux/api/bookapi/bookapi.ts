@@ -10,6 +10,7 @@ type UpdateBookArg = {
   data: Partial<Omit<IBook, "_id">>;
 };
 
+type ICreateBookInput = Omit<IBook, "_id">;
 export const bookApi = createApi({
   reducerPath: "bookApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
@@ -19,7 +20,7 @@ export const bookApi = createApi({
       query: () => "/books",
       providesTags: ["book", "borrows"],
     }),
-    createBook: builder.mutation<ICreateBookResponse, IBook>({
+    createBook: builder.mutation<ICreateBookResponse, ICreateBookInput>({
       query: (bookData) => ({
         url: "/books",
         method: "POST",

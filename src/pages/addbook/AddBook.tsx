@@ -1,11 +1,13 @@
 import { Button } from "@/components/ui/button";
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-} from "@/components/ui/form";
+import { Card, CardContent } from "@/components/ui/card";
+// import {
+//   FormControl,
+//   FormField,
+//   FormItem,
+//   FormLabel,
+// } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -14,23 +16,41 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import type { IBook } from "@/interface/book/book.interface";
+import { formSchema } from "@/interface/book/book.zod.schema";
 import { useCreateBookMutation } from "@/redux/api/bookapi/bookApi";
-import { FormProvider, useForm, type SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
+import * as z from "zod";
+const genres = [
+  "FICTION",
+  "NON_FICTION",
+  "SCIENCE",
+  "HISTORY",
+  "BIOGRAPHY",
+  "FANTASY",
+] as const;
 
+type FormData = z.infer<typeof formSchema>;
 const AddBook = () => {
   const navigate = useNavigate();
-  const form = useForm<IBook>();
   const [createBook] = useCreateBookMutation();
-  const { handleSubmit, control } = form;
-  const onSubmit: SubmitHandler<IBook> = async (data) => {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+  });
+  const onSubmit = async (data: FormData) => {
     try {
       const bookData = {
         ...data,
         copies: Number(data?.copies),
       };
+      console.log(bookData);
       await createBook(bookData).unwrap();
       toast.success("Book created successfully!");
       navigate("/books");
@@ -40,184 +60,131 @@ const AddBook = () => {
     }
   };
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white dark:bg-[#171717] rounded-lg shadow-lg">
-      <FormProvider {...form}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          {/* title */}
-          <FormField
-            control={control}
-            name="title"
-            rules={{ required: "Title is required" }}
-            render={({ field, fieldState }) => (
-              <FormItem>
-                <FormLabel>Title</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Add your title here"
-                    {...field}
-                    value={field.value || ""}
-                  />
-                </FormControl>
-                {fieldState.error && (
-                  <p className="text-red-500 text-xs">
-                    {fieldState.error.message}
-                  </p>
-                )}
-              </FormItem>
-            )}
-          />
+    <Card className="max-w-xl mx-auto mt-10">
+      {/* <Helmet>
+        <title>Add New Book</title>
+        <meta name="description" content="Add New Book" />
+      </Helmet> */}
 
-          {/* author */}
-          <FormField
-            control={control}
-            name="author"
-            rules={{ required: "Author is required" }}
-            render={({ field, fieldState }) => (
-              <FormItem>
-                <FormLabel>Author</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Add your author here"
-                    {...field}
-                    value={field.value || ""}
-                  />
-                </FormControl>
-                {fieldState.error && (
-                  <p className="text-red-500 text-xs">
-                    {fieldState.error.message}
-                  </p>
-                )}
-              </FormItem>
+      <CardContent className="p-6">
+        <h2 className="text-2xl font-bold mb-6">Add New Book</h2>
+
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          {/* Title */}
+          <div className="space-y-2">
+            <Label htmlFor="title">Title</Label>
+            <Input
+              id="title"
+              placeholder="Add your title here"
+              {...register("title")}
+            />
+            {errors.title && (
+              <p className="text-sm text-destructive">{errors.title.message}</p>
             )}
-          />
-          {/* image */}
-          <FormField
-            control={control}
-            name="image"
-            rules={{ required: "Image is required" }}
-            render={({ field, fieldState }) => (
-              <FormItem>
-                <FormLabel>Image</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Add your image url here"
-                    {...field}
-                    value={field.value || ""}
-                  />
-                </FormControl>
-                {fieldState.error && (
-                  <p className="text-red-500 text-xs">
-                    {fieldState.error.message}
-                  </p>
-                )}
-              </FormItem>
+          </div>
+
+          {/* Author */}
+          <div className="space-y-2">
+            <Label htmlFor="author">Author</Label>
+            <Input
+              id="author"
+              placeholder="Add your author here"
+              {...register("author")}
+            />
+            {errors.author && (
+              <p className="text-sm text-destructive">
+                {errors.author.message}
+              </p>
             )}
-          />
-          {/* genre */}
-          <FormField
-            control={control}
-            name="genre"
-            rules={{ required: "Genre is required" }}
-            render={({ field, fieldState }) => (
-              <FormItem className="">
-                <FormLabel className="mt-2">Genre</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select Genre" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="FICTION">FICTION</SelectItem>
-                    <SelectItem value="NON_FICTION">NON_FICTION</SelectItem>
-                    <SelectItem value="SCIENCE">SCIENCE</SelectItem>
-                    <SelectItem value="HISTORY">HISTORY</SelectItem>
-                    <SelectItem value="BIOGRAPHY">BIOGRAPHY</SelectItem>
-                    <SelectItem value="FANTASY">FANTASY</SelectItem>
-                  </SelectContent>
-                </Select>
-                {fieldState.error && (
-                  <p className="text-red-500 text-xs">
-                    {fieldState.error.message}
-                  </p>
-                )}
-              </FormItem>
+          </div>
+
+          {/* Image URL */}
+          <div className="space-y-2">
+            <Label htmlFor="image">Image</Label>
+            <Input
+              id="image"
+              placeholder="Add your image url here"
+              {...register("image")}
+            />
+            {errors.image && (
+              <p className="text-sm text-destructive">{errors.image.message}</p>
             )}
-          />
-          {/* isbn */}
-          <FormField
-            control={control}
-            name="isbn"
-            rules={{ required: "ISBN is required" }}
-            render={({ field, fieldState }) => (
-              <FormItem>
-                <FormLabel>ISBN</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Add your image url here"
-                    {...field}
-                    value={field.value || ""}
-                  />
-                </FormControl>
-                {fieldState.error && (
-                  <p className="text-red-500 text-xs">
-                    {fieldState.error.message}
-                  </p>
-                )}
-              </FormItem>
+          </div>
+
+          {/* Genre Dropdown */}
+          <div className="space-y-2">
+            <Label htmlFor="genre">Genre</Label>
+            <Select
+              onValueChange={(value) =>
+                setValue("genre", value as FormData["genre"])
+              }
+            >
+              <SelectTrigger id="genre" className="w-full">
+                <SelectValue placeholder="Select Genre" />
+              </SelectTrigger>
+              <SelectContent>
+                {genres.map((genre) => (
+                  <SelectItem key={genre} value={genre}>
+                    {genre.replace("_", " ")}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            {errors.genre && (
+              <p className="text-sm text-destructive">{errors.genre.message}</p>
             )}
-          />
-          {/* description */}
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="mt-2">Description</FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="Add your description here"
-                    {...field}
-                    value={field.value || ""}
-                  />
-                </FormControl>
-              </FormItem>
+          </div>
+
+          {/* ISBN */}
+          <div className="space-y-2">
+            <Label htmlFor="isbn">ISBN</Label>
+            <Input
+              id="isbn"
+              placeholder="Add your ISBN here"
+              {...register("isbn")}
+            />
+            {errors.isbn && (
+              <p className="text-sm text-destructive">{errors.isbn.message}</p>
             )}
-          />
-          {/* copies */}
-          <FormField
-            control={control}
-            name="copies"
-            rules={{
-              required: "Copies must be is required",
-              min: {
-                value: 1,
-                message: "Copies must be at least 1",
-              },
-            }}
-            render={({ field, fieldState }) => (
-              <FormItem>
-                <FormLabel>Copies</FormLabel>
-                <FormControl>
-                  <Input type="number" {...field} />
-                </FormControl>
-                {fieldState.error && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {fieldState.error.message}
-                  </p>
-                )}
-              </FormItem>
+          </div>
+
+          {/* Description */}
+          <div className="space-y-2">
+            <Label htmlFor="description">Description</Label>
+            <Textarea
+              id="description"
+              rows={3}
+              placeholder="Add your description here"
+              {...register("description")}
+            />
+          </div>
+
+          {/* Copies */}
+          <div className="space-y-2">
+            <Label htmlFor="copies">Copies</Label>
+            <Input
+              id="copies"
+              type="number"
+              placeholder="Add number of copies"
+              {...register("copies", { valueAsNumber: true })}
+            />
+            {errors.copies && (
+              <p className="text-sm text-destructive">
+                {errors.copies.message}
+              </p>
             )}
-          />
-          <Button className="w-full" type="submit">
+          </div>
+
+          {/* Submit */}
+          {/* <Button type="submit" disabled={isSubmitting} className="w-full mt-4">
+            {isSubmitting ? "Creating..." : "Create Book"}
+          </Button> */}
+          <Button type="submit" className="w-full mt-4">
             Create Book
           </Button>
         </form>
-      </FormProvider>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 
