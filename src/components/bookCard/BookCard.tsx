@@ -23,7 +23,7 @@ const BookCard = ({ book }: IPops) => {
   const [deleteBook] = useDeleteBookMutation();
   const handleDelete = async () => {
     try {
-      await deleteBook(book._id);
+      await deleteBook(book._id!);
       toast.success("Book Deleted successfully!");
     } catch (error) {
       console.log(error);

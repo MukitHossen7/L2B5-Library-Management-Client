@@ -1,11 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-// import {
-//   FormControl,
-//   FormField,
-//   FormItem,
-//   FormLabel,
-// } from "@/components/ui/form";
+import { Helmet } from "react-helmet";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -61,10 +56,10 @@ const AddBook = () => {
   };
   return (
     <Card className="max-w-xl mx-auto mt-10">
-      {/* <Helmet>
+      <Helmet>
         <title>Add New Book</title>
         <meta name="description" content="Add New Book" />
-      </Helmet> */}
+      </Helmet>
 
       <CardContent className="p-6">
         <h2 className="text-2xl font-bold mb-6">Add New Book</h2>

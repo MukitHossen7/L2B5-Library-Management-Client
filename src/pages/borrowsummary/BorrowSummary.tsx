@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 
 import { useGetBorrowSummaryQuery } from "@/redux/api/borrowApi/borrowApi";
+import { Helmet } from "react-helmet";
 
 type TBorrowSummary = {
   book: {
@@ -31,9 +32,13 @@ const BorrowSummary = () => {
     );
 
   const borrowSummerys: TBorrowSummary[] = borrowData?.data || [];
-  console.log(borrowSummerys);
+
   return (
     <div className="w-11/12 md:w-11/12 lg:w-11/12 xl:container mx-auto">
+      <Helmet>
+        <title>Borrow Summary</title>
+        <meta name="description" content="Borrow Summary" />
+      </Helmet>
       <h2 className="text-lg lg:text-2xl font-bold">Borrow Summary</h2>
       <Card className="mt-6">
         <CardContent>

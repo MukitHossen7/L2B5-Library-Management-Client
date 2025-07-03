@@ -1,10 +1,10 @@
 import BookCard from "@/components/bookCard/BookCard";
 import type { IBook } from "@/interface/book/book.interface";
 import { useGetBooksQuery } from "@/redux/api/bookapi/bookApi";
+import { Helmet } from "react-helmet";
 
 const AllBooks = () => {
   const { data: bookData, isLoading, isError } = useGetBooksQuery(undefined);
-
   if (isLoading) {
     return (
       <p className="text-center text-destructive text-2xl  dark:text-white">
@@ -21,6 +21,10 @@ const AllBooks = () => {
   const books: IBook[] = bookData?.data || [];
   return (
     <div className="w-11/12 md:w-11/12 lg:w-11/12 xl:container mx-auto">
+      <Helmet>
+        <title>All Books</title>
+        <meta name="description" content="All Books" />
+      </Helmet>
       <h1 className="text-lg lg:text-2xl font-bold mb-5"> All Books </h1>
       {!isLoading && books?.length === 0 ? (
         <p className="text-center text-lg md:text-xl lg:text-3xl font-bold py-6 lg:py-10">

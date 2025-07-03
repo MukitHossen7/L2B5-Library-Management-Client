@@ -22,6 +22,7 @@ import { useEffect, useState } from "react";
 import { useUpdateBookMutation } from "@/redux/api/bookapi/bookApi";
 import toast from "react-hot-toast";
 import { useLazyGetBorrowSummaryQuery } from "@/redux/api/borrowApi/borrowApi";
+import { FaRegEdit } from "react-icons/fa";
 interface UpdateDialogProps {
   book: IBook;
 }
@@ -66,7 +67,10 @@ export function UpdateDialog({ book }: UpdateDialogProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">Edit</Button>
+        <Button variant="outline">
+          <FaRegEdit />
+          Edit
+        </Button>
       </DialogTrigger>
       <DialogContent className="max-h-[90vh] overflow-y-auto">
         <DialogHeader>
