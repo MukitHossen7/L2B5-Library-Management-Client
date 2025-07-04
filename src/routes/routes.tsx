@@ -3,6 +3,7 @@ import MainLayout from "../layouts/MainLayout";
 import AllBooks from "../pages/allbooks/AllBooks";
 import AddBook from "../pages/addbook/AddBook";
 import BorrowSummary from "../pages/borrowsummary/BorrowSummary";
+import Home from "@/pages/home/Home";
 
 const router = createBrowserRouter([
   {
@@ -11,7 +12,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        Component: AllBooks,
+        Component: Home,
       },
       {
         path: "books",
