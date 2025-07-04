@@ -45,7 +45,6 @@ const AddBook = () => {
         ...data,
         copies: Number(data?.copies),
       };
-      console.log(bookData);
       await createBook(bookData).unwrap();
       toast.success("Book created successfully!");
       navigate("/books");
