@@ -1,7 +1,7 @@
 import Loader from "@/components/loader/Loader";
 import { Card, CardContent } from "@/components/ui/card";
+import { useGetBorrowSummaryQuery } from "@/redux/api/baseApi";
 
-import { useGetBorrowSummaryQuery } from "@/redux/api/borrowApi/borrowApi";
 import { Helmet } from "react-helmet";
 
 type TBorrowSummary = {

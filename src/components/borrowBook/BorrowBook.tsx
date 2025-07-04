@@ -20,22 +20,20 @@ import { cn } from "@/lib/utils";
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { Calendar } from "../ui/calendar";
-import { useCreateBorrowMutation } from "@/redux/api/borrowApi/borrowApi";
 
 import { useNavigate } from "react-router";
-// import { useGetBooksQuery } from "@/redux/api/bookapi/bookApi";
+import { useCreateBorrowMutation } from "@/redux/api/baseApi";
 
 interface BorrowDialogProps {
   book: IBook;
-  onComplete: () => void;
 }
 
-export function BorrowDialog({ book, onComplete }: BorrowDialogProps) {
+export function BorrowDialog({ book }: BorrowDialogProps) {
   const [quantity, setQuantity] = useState<number>(1);
   const [dueDate, setDueDate] = useState<Date | null>(null);
   const [open, setOpen] = useState(false);
   const [createBorrow] = useCreateBorrowMutation();
-  // const { refetch } = useGetBooksQuery({});
+
   const navigate = useNavigate();
   const handleSubmit = async () => {
     if (!book || quantity < 1 || !dueDate) {
@@ -49,7 +47,7 @@ export function BorrowDialog({ book, onComplete }: BorrowDialogProps) {
         dueDate,
       };
       await createBorrow(borrowData).unwrap();
-      onComplete();
+
       toast.success("Book borrow successfully!");
       navigate("/borrow-summary");
       setOpen(false);

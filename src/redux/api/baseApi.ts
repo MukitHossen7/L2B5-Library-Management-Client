@@ -1,10 +1,10 @@
-import { BASE_URL } from "@/config/baseUrl";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type {
   IBook,
   IBooksResponse,
   ICreateBookResponse,
 } from "@/interface/book/book.interface";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { BASE_URL } from "@/config/baseUrl";
 
 type UpdateBookArg = {
   id: string;
@@ -16,31 +16,32 @@ interface IGetBooksParams {
   limit?: number;
 }
 type ICreateBookInput = Omit<IBook, "_id">;
-export const bookApi = createApi({
-  reducerPath: "bookApi",
+
+export const baseApi = createApi({
+  reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   tagTypes: ["book", "borrows"],
   endpoints: (builder) => ({
+    // Books
     getBooks: builder.query<IBooksResponse, IGetBooksParams>({
       query: ({ page = 1, limit = 10 } = {}) =>
         `/books?page=${page}&limit=${limit}`,
-      providesTags: ["book", "borrows"],
+      providesTags: ["book"],
     }),
-
     createBook: builder.mutation<ICreateBookResponse, ICreateBookInput>({
       query: (bookData) => ({
         url: "/books",
         method: "POST",
         body: bookData,
       }),
-      invalidatesTags: ["book", "borrows"],
+      invalidatesTags: ["book"],
     }),
     deleteBook: builder.mutation<void, string>({
       query: (id) => ({
         url: `/books/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["book", "borrows"],
+      invalidatesTags: ["book"],
     }),
     updateBook: builder.mutation<void, UpdateBookArg>({
       query: ({ id, data }) => ({
@@ -48,14 +49,33 @@ export const bookApi = createApi({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: ["book", "borrows"],
+      invalidatesTags: ["book"],
+    }),
+
+    // Borrows
+    getBorrowSummary: builder.query({
+      query: () => "/borrow",
+      providesTags: ["borrows", "book"],
+    }),
+    createBorrow: builder.mutation({
+      query: (borrowData) => ({
+        url: "/borrow",
+        method: "POST",
+        body: borrowData,
+      }),
+      invalidatesTags: ["borrows", "book"],
     }),
   }),
 });
 
 export const {
-  useCreateBookMutation,
+  //book hook
   useGetBooksQuery,
+  useCreateBookMutation,
   useDeleteBookMutation,
   useUpdateBookMutation,
-} = bookApi;
+
+  // Borrow Hooks
+  useGetBorrowSummaryQuery,
+  useCreateBorrowMutation,
+} = baseApi;

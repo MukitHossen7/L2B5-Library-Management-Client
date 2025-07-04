@@ -19,10 +19,11 @@ import {
 } from "@/components/ui/dialog";
 import type { IBook } from "@/interface/book/book.interface";
 import { useEffect, useState } from "react";
-import { useUpdateBookMutation } from "@/redux/api/bookapi/bookApi";
+
 import toast from "react-hot-toast";
-import { useLazyGetBorrowSummaryQuery } from "@/redux/api/borrowApi/borrowApi";
+
 import { FaRegEdit } from "react-icons/fa";
+import { useUpdateBookMutation } from "@/redux/api/baseApi";
 interface UpdateDialogProps {
   book: IBook;
 }
@@ -30,7 +31,7 @@ interface UpdateDialogProps {
 export function UpdateDialog({ book }: UpdateDialogProps) {
   const [open, setOpen] = useState(false);
   const [updateBook] = useUpdateBookMutation();
-  const [triggerBorrowSummary] = useLazyGetBorrowSummaryQuery();
+
   const {
     register,
     handleSubmit,
@@ -56,7 +57,7 @@ export function UpdateDialog({ book }: UpdateDialogProps) {
   const onSubmit = async (data: FormData) => {
     try {
       await updateBook({ id: book._id!, data: data });
-      await triggerBorrowSummary(undefined);
+
       setOpen(false);
       toast.success("Book update successfully!");
     } catch (error) {

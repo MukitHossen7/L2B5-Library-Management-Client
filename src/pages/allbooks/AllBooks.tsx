@@ -3,7 +3,8 @@ import Loader from "@/components/loader/Loader";
 // import Loader from "@/components/loader/Loader";
 import { Button } from "@/components/ui/button";
 import type { IBook } from "@/interface/book/book.interface";
-import { useGetBooksQuery } from "@/redux/api/bookapi/bookApi";
+import { useGetBooksQuery } from "@/redux/api/baseApi";
+
 import { useState } from "react";
 import { Helmet } from "react-helmet";
 
