@@ -1,6 +1,5 @@
 import BookCard from "@/components/bookCard/BookCard";
 import Loader from "@/components/loader/Loader";
-// import Loader from "@/components/loader/Loader";
 import { Button } from "@/components/ui/button";
 import type { IBook } from "@/interface/book/book.interface";
 import { useGetBooksQuery } from "@/redux/api/baseApi";

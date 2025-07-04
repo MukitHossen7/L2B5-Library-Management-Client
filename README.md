@@ -49,6 +49,8 @@ npm install
 ```
 MONGODB_URI=your_mongodb_connection_string
 API_BASE_URL=http://localhost:5000/api
+or
+API_BASE_URL="https://l2-b5-library-management-api.vercel.app/api
 ```
 
 ### 4. Run the Development Server
