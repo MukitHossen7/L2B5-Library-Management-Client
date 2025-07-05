@@ -15,6 +15,8 @@ import { UpdateDialog } from "../updateBook/UpdateBook";
 import { DeleteDialog } from "../deleteBook/DeleteBook";
 import { BorrowDialog } from "../borrowBook/BorrowBook";
 import { useDeleteBookMutation } from "@/redux/api/baseApi";
+import { Button } from "../ui/button";
+import { Link } from "react-router";
 
 interface IPops {
   book: IBook;
@@ -68,6 +70,10 @@ const BookCard = ({ book }: IPops) => {
         <CardFooter className="flex justify-between gap-2">
           {/* Borrow Button */}
           <BorrowDialog book={book} />
+
+          <Link to={`/books/${book._id} `}>
+            <Button>Details</Button>
+          </Link>
 
           {/* Edit Button */}
           <UpdateDialog book={book} />

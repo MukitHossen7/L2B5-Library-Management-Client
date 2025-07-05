@@ -18,6 +18,9 @@ interface IGetBooksParams {
 interface IGetHightCopiesResponse {
   data: IBook[];
 }
+interface IGetBookByIdResponse {
+  data: IBook;
+}
 type ICreateBookInput = Omit<IBook, "_id">;
 
 export const baseApi = createApi({
@@ -33,6 +36,10 @@ export const baseApi = createApi({
     }),
     getHighestBookCopies: builder.query<IGetHightCopiesResponse, void>({
       query: () => "/books/highest-copies",
+      providesTags: ["book"],
+    }),
+    getBookById: builder.query<IGetBookByIdResponse, { id: string }>({
+      query: ({ id }) => `/books/${id}`,
       providesTags: ["book"],
     }),
     createBook: builder.mutation<ICreateBookResponse, ICreateBookInput>({
@@ -82,6 +89,7 @@ export const {
   useDeleteBookMutation,
   useUpdateBookMutation,
   useGetHighestBookCopiesQuery,
+  useGetBookByIdQuery,
   // Borrow Hooks
   useGetBorrowSummaryQuery,
   useCreateBorrowMutation,
