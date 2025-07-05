@@ -1,3 +1,4 @@
+import Banner from "@/components/banner/Banner";
 import BookCard from "@/components/bookCard/BookCard";
 import Loader from "@/components/loader/Loader";
 import { Button } from "@/components/ui/button";
@@ -30,6 +31,7 @@ const Home = () => {
         <title>Library Management</title>
         <meta name="description" content="Library Management" />
       </Helmet>
+      <Banner></Banner>
       <div>
         <h2 className="text-lg lg:text-2xl font-bold mb-5">
           Highest Copies Book

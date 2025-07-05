@@ -72,29 +72,25 @@ const Navbar = () => {
               </svg>
             </button>
             {isMenuOpen && (
-              <div className="absolute top-0 left-0 w-full z-10">
+              <div className="absolute top-0 left-0 w-full z-50 ">
                 <div className="p-5 dark:bg-[#0A0A0A] bg-white border rounded shadow-sm">
                   <div className="flex items-center justify-between mb-4">
                     <Link to="/">
                       <div className="inline-flex items-center">
-                        <svg
-                          className="w-8 text-purple-600"
-                          viewBox="0 0 24 24"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeMiterlimit="10"
-                          stroke="currentColor"
-                          fill="none"
+                        <div
+                          aria-label="Company"
+                          title="Company"
+                          className="inline-flex items-center"
                         >
-                          <rect x="3" y="1" width="7" height="12" />
-                          <rect x="3" y="17" width="7" height="6" />
-                          <rect x="14" y="1" width="7" height="6" />
-                          <rect x="14" y="11" width="7" height="12" />
-                        </svg>
-                        <span className="ml-2 text-xl font-bold tracking-wide  uppercase">
-                          Company
-                        </span>
+                          <img
+                            src={bookIcon}
+                            alt="Book Icon"
+                            className="h-8 w-8 dark:invert"
+                          />
+                          <span className="ml-2 text-xl font-bold tracking-wide uppercase">
+                            Library
+                          </span>
+                        </div>
                       </div>
                     </Link>
                     <button
