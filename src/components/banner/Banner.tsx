@@ -14,8 +14,8 @@ const Banner = () => {
               </p>
             </div>
             <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 dark:text-white sm:text-4xl md:mx-auto">
-              <span className="relative inline-block">
-                <span className="relative">Manage</span>
+              <span className="inline-block">
+                <span className="">Manage</span>
               </span>{" "}
               your library the smart way
             </h2>
@@ -36,9 +36,9 @@ const Banner = () => {
       </div>
 
       {/* Feature Cards */}
-      <div className="relative px-4 sm:px-0">
+      <div className=" px-4 sm:px-0">
         <div className="absolute inset-0  h-1/2" />
-        <div className="relative grid mx-auto overflow-hidden bg-white dark:bg-gray-900 divide-y dark:divide-gray-700 rounded-xl shadow sm:divide-y-0 sm:divide-x sm:max-w-screen-sm sm:grid-cols-3 lg:max-w-screen-md">
+        <div className=" grid mx-auto overflow-hidden bg-white dark:bg-gray-900 divide-y dark:divide-gray-700 rounded-xl shadow sm:divide-y-0 sm:divide-x sm:max-w-screen-sm sm:grid-cols-3 lg:max-w-screen-md">
           {/* Card 1 */}
           <div className="inline-block p-8 text-center dark:bg-neutral-900 ">
             <div className="flex items-center justify-center w-12 h-12 mx-auto mb-4 rounded-full bg-indigo-100 dark:bg-indigo-800">
