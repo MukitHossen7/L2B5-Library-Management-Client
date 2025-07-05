@@ -61,7 +61,7 @@ export function BorrowDialog({ book }: BorrowDialogProps) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button className="bg-black dark:bg-white text-white  dark:text-black font-bold">
-          Borrow
+          Borrow Book
         </Button>
       </DialogTrigger>
       <DialogContent>

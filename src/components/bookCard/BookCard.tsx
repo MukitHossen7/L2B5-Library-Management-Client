@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-
+import { HiViewGridAdd } from "react-icons/hi";
 import {
   Card,
   CardContent,
@@ -15,8 +15,9 @@ import { UpdateDialog } from "../updateBook/UpdateBook";
 import { DeleteDialog } from "../deleteBook/DeleteBook";
 import { BorrowDialog } from "../borrowBook/BorrowBook";
 import { useDeleteBookMutation } from "@/redux/api/baseApi";
-import { Button } from "../ui/button";
+
 import { Link } from "react-router";
+import { Button } from "../ui/button";
 
 interface IPops {
   book: IBook;
@@ -67,13 +68,15 @@ const BookCard = ({ book }: IPops) => {
             </span>
           </p>
         </CardContent>
-        <CardFooter className="flex justify-between gap-2">
+        <CardFooter className="flex justify-between gap-2 mt-5">
           {/* Borrow Button */}
           <BorrowDialog book={book} />
 
-          <Link to={`/books/${book._id} `}>
-            <Button>Details</Button>
-          </Link>
+          <Button className="" variant="outline">
+            <Link to={`/books/${book._id} `}>
+              <HiViewGridAdd />
+            </Link>
+          </Button>
 
           {/* Edit Button */}
           <UpdateDialog book={book} />
