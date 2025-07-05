@@ -5,7 +5,7 @@ import { Link } from "react-router";
 const Banner = () => {
   return (
     <div className="mb-16">
-      <div className="bg-gray-50 dark:bg-[#171717] transition-colors duration-300">
+      <div className="transition-colors duration-300">
         <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
           <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
             <div>
@@ -37,10 +37,10 @@ const Banner = () => {
 
       {/* Feature Cards */}
       <div className="relative px-4 sm:px-0">
-        <div className="absolute inset-0 bg-gray-100  dark:bg-[#171717] h-1/2" />
-        <div className="relative grid mx-auto overflow-hidden bg-white dark:bg-gray-900 divide-y dark:divide-gray-700 rounded shadow sm:divide-y-0 sm:divide-x sm:max-w-screen-sm sm:grid-cols-3 lg:max-w-screen-md">
+        <div className="absolute inset-0  h-1/2" />
+        <div className="relative grid mx-auto overflow-hidden bg-white dark:bg-gray-900 divide-y dark:divide-gray-700 rounded-xl shadow sm:divide-y-0 sm:divide-x sm:max-w-screen-sm sm:grid-cols-3 lg:max-w-screen-md">
           {/* Card 1 */}
-          <div className="inline-block p-8 text-center dark:bg-neutral-900">
+          <div className="inline-block p-8 text-center dark:bg-neutral-900 ">
             <div className="flex items-center justify-center w-12 h-12 mx-auto mb-4 rounded-full bg-indigo-100 dark:bg-indigo-800">
               <FaBook className="text-indigo-600 dark:text-indigo-300 text-2xl" />
             </div>
